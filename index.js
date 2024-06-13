@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const qs_1 = __importDefault(require("qs"));
+const cheerio_1 = __importDefault(require("cheerio"));
 function Solve(appNo, day, month, year) {
     return __awaiter(this, void 0, void 0, function* () {
         let data = qs_1.default.stringify({
@@ -49,7 +50,34 @@ function Solve(appNo, day, month, year) {
         };
         //request part
         const response = yield (0, axios_1.default)(config);
-        console.log(response.data);
+        const parsedData = parseHTML(JSON.stringify(response.data));
+        if (parsedData) {
+            console.log(parsedData);
+        }
+        else {
+            console.log("Invalid Details");
+        }
     });
+}
+function parseHTML(html) {
+    const $ = cheerio_1.default.load(html);
+    let data = $("div").text();
+    const appNo = $('td:contains("Application No.")').next("td").text() || "N/A";
+    const candidateName = $('td:contains("Candidate’s Name")').next().text().trim() || "N/A";
+    const air = $('td:contains("NEET All India Rank")').next("td").text().trim() || "N/A";
+    const marks = $('td:contains("Total Marks Obtained (out of 720)")')
+        .first()
+        .next("td")
+        .text()
+        .trim() || "N/A";
+    console.log(appNo, candidateName, air, marks);
+    if (air === "N/A")
+        return null;
+    return {
+        appNo,
+        candidateName,
+        air,
+        marks,
+    };
 }
 Solve("240411183516", "08", "03", "2007");

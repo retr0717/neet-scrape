@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import cheerio from "cheerio";
 
 async function Solve(appNo: string, day: string, month: string, year: string) {
   let data = qs.stringify({
@@ -42,7 +43,40 @@ async function Solve(appNo: string, day: string, month: string, year: string) {
 
   //request part
   const response = await axios(config);
-  console.log(response.data);
+  const parsedData = parseHTML(JSON.stringify(response.data));
+  if (parsedData) {
+    console.log(parsedData);
+  } else {
+    console.log("Invalid Details");
+  }
+}
+
+function parseHTML(html: string) {
+  const $ = cheerio.load(html);
+  let data = $("div").text();
+
+  const appNo = $('td:contains("Application No.")').next("td").text() || "N/A";
+  const candidateName =
+    $('td:contains("Candidate’s Name")').next().text().trim() || "N/A";
+  const air =
+    $('td:contains("NEET All India Rank")').next("td").text().trim() || "N/A";
+  const marks =
+    $('td:contains("Total Marks Obtained (out of 720)")')
+      .first()
+      .next("td")
+      .text()
+      .trim() || "N/A";
+
+  console.log(appNo, candidateName, air, marks);
+
+  if (air === "N/A") return null;
+
+  return {
+    appNo,
+    candidateName,
+    air,
+    marks,
+  };
 }
 
 Solve("240411183516", "08", "03", "2007");
