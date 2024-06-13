@@ -51,12 +51,7 @@ function Solve(appNo, day, month, year) {
         //request part
         const response = yield (0, axios_1.default)(config);
         const parsedData = parseHTML(JSON.stringify(response.data));
-        if (parsedData) {
-            console.log(parsedData);
-        }
-        else {
-            console.log("Invalid Details");
-        }
+        return parsedData;
     });
 }
 function parseHTML(html) {
@@ -70,7 +65,6 @@ function parseHTML(html) {
         .next("td")
         .text()
         .trim() || "N/A";
-    console.log(appNo, candidateName, air, marks);
     if (air === "N/A")
         return null;
     return {
@@ -80,4 +74,20 @@ function parseHTML(html) {
         marks,
     };
 }
-Solve("240411183516", "08", "03", "2007");
+function main(rollNo) {
+    return __awaiter(this, void 0, void 0, function* () {
+        for (let year = 2007; year >= 2004; year--) {
+            for (let month = 1; month <= 12; month++) {
+                for (let day = 1; day <= 31; day++) {
+                    console.log(`Checking :  ${day}-${month}-${year}`);
+                    const data = yield Solve(rollNo.toString(), day.toString(), month.toString(), year.toString());
+                    if (data) {
+                        console.log(data);
+                        process.exit(1);
+                    }
+                }
+            }
+        }
+    });
+}
+main("240411183517");
