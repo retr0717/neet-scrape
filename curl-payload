@@ -1,0 +1,18 @@
+curl 'https://neet.ntaonline.in/frontend/web/scorecard/index' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Cookie: advanced-frontend=nohs44dqg392h2dtnt0qio4pcs; _csrf-frontend=0b9346632bb6160d187f6aad61165951bd63215923b3ffc147832b502cddbb49a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%2274NveK0uRuBKhhLGEsDfmr2DgR749GJM%22%3B%7D' \
+  -H 'Origin: null' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  --data-raw '_csrf-frontend=Qg8sXy8NvkA68wvc6O19bbFTHYNmv8EiCu4oTAETcXx1O2IpSkaONWiGSZeAhTEq9CBZ5QvN82ZtvB94OFQ7MQ%3D%3D&Scorecardmodel%5BApplicationNumber%5D=240411183516&Scorecardmodel%5BDay%5D=08&Scorecardmodel%5BMonth%5D=03&Scorecardmodel%5BYear%5D=2007'
